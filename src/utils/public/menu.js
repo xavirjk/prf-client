@@ -16,7 +16,7 @@ export const CollapsableMenu = (props) => {
       <div>
         <Styled.SMIconsCont>
           <a
-            href='http://web.facebook.com/magdalene.major'
+            href='https://www.instagram.com/major_magdaline/'
             target='_blank'
             rel='noreferrer'
           >
@@ -25,7 +25,7 @@ export const CollapsableMenu = (props) => {
           <a href='https://web.facebook.com/magdaline.major'>
             <icons.Fb fill={'#1280a5'} size={20} />
           </a>
-          <a href='http://web.facebook.com/magdalene.major'>
+          <a href='https://twitter.com/magdalinemajor'>
             <icons.Twitter fill={'#1280a5'} size={20} />
           </a>
           <a href='http://web.facebook.com/magdalene.major'>
