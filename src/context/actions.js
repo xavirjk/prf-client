@@ -1,5 +1,7 @@
-const ROOT_URL = 'http://localhost:3200';
+//const ROOT_URL = 'http://localhost:3200';
+import { c_routes } from '../utils';
 
+const { ROOT_URL } = c_routes;
 const requestOptions = {
   method: 'POST',
   headers: {
@@ -50,7 +52,6 @@ export async function UploadData(dispatch, payload, path) {
       (err) => {
         const error = err.error ? err.error : 'server Not Found';
         dispatch({ type: 'APIACCESS_ERROR', error: error });
-        console.log('error', error);
         response = 0;
       }
     );
