@@ -4,8 +4,7 @@ import * as icons from '../images';
 import { CollapsableMenu } from '../utils/public/menu';
 export const Entry = (props) => {
   //Temp
-  console.log(props);
-  const [toggled, setToggle] = useState(0);
+  const [toggled, setToggle] = useState(1);
   const [inView, setView] = useState(0);
 
   return (
@@ -17,9 +16,9 @@ export const Entry = (props) => {
           }}
         >
           {!toggled ? (
-            <Styled.HeaderIc>
-              <icons.User size={30} />
-            </Styled.HeaderIc>
+            <Styled.HeaderBar>
+              <icons.Bars size={30} />
+            </Styled.HeaderBar>
           ) : (
             <Styled.BackIc>
               <icons.BackArrow size={30} />
@@ -29,7 +28,9 @@ export const Entry = (props) => {
         <Styled.HeaderCt />
       </Styled.Header>
       <Styled.BodyCt>
-        {toggled ? <CollapsableMenu setView={setView} /> : null}
+        {toggled ? (
+          <CollapsableMenu setView={setView} history={props.history} />
+        ) : null}
         <Styled.MainCont toggled={toggled}>
           <props.component inView={inView} history={props.history} />
         </Styled.MainCont>

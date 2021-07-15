@@ -24,8 +24,8 @@ export const InpField = Styled.div`
 `;
 
 export const SmediaFields = Styled(InpField)`
-    width: 100%;
-    padding: .2rem .2rem;
+    width: 70%;
+    padding: .4rem .2rem;
 `;
 export const SMInputs = Styled(Input)`
    padding: .5rem 0 0 2rem;
@@ -48,4 +48,14 @@ export const ErrorCard = Styled.div`
     font-style: italic;
     width: 90%;
     color: red;
+`;
+
+export const CustomForm = Styled(Form)`
+     width: 80%;
+     margin-top: 10px;
+`;
+
+export const CustomLogin = Styled(Login)`
+    padding: .5rem;
+    margin: .5rem;
 `;

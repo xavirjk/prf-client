@@ -3,9 +3,18 @@ import * as Styled from '../../components';
 import * as icons from '../../images';
 import * as utils from '../../utils';
 import { useAuthDispatch, useAuthState, UploadData } from '../../context';
+import { Structure } from '../framework/public';
+import { Entry } from '../entry';
+
+const Main = (props) => {
+  return <Structure rendered={Login} history={props.history} />;
+};
+
+export const LogPage = (props) => (
+  <Entry component={Main} history={props.history} />
+);
 
 export const Login = (props) => {
-  console.log('prps', props.history);
   const dispatch = useAuthDispatch();
 
   const { loading } = useAuthState();
@@ -17,8 +26,8 @@ export const Login = (props) => {
     let validation_info = utils.AssertAndValidateLogin(payload);
 
     if (validation_info === 'valid') {
-      console.log(payload);
       let response = await UploadData(dispatch, payload, pathname);
+
       if (response) {
         utils.clearContextErrors(dispatch);
         props.history.push('/customize');

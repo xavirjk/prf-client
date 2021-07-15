@@ -1,5 +1,7 @@
 export const c_routes = {
   home: '/home',
-  customize: '/customize',
   about: '/about',
+  signin: '/sign-in',
+  customize: '/customize',
+  contacts: '/contacts',
 };

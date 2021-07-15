@@ -32,9 +32,18 @@ export async function UploadData(dispatch, payload, path) {
           dispatch({ type: 'LOGIN_SUCCESS', payload: load });
           localStorage.setItem('_u', JSON.stringify(load));
           response = load;
+        } else if (user.access) {
+          dispatch({ type: 'UPLOAD_SUCCESS' });
+          localStorage.setItem(
+            '_u_access',
+            JSON.stringify({ sffd_yh: user.token })
+          );
+          response = user;
         } else if (user.message) {
           dispatch({ type: 'UPLOAD_SUCCESS' });
           response = user;
+        } else {
+          response = 0;
         }
       },
 
@@ -51,8 +60,8 @@ export async function UploadData(dispatch, payload, path) {
 
 export async function fetchData(dispatch, path) {
   dispatch({ type: 'REQUEST_API' });
-  requestOptions.headers.authorization = localStorage.getItem('_u')
-    ? `${JSON.parse(localStorage.getItem('_u')).u}`
+  requestOptions.headers.authorization = localStorage.getItem('_u_access')
+    ? `${JSON.parse(localStorage.getItem('_u_access')).sffd_yh}`
     : '';
   const headers = requestOptions.headers;
   await fetch(`${ROOT_URL}${path}`, { headers })

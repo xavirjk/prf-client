@@ -1,10 +1,10 @@
 import Styled, { css, keyframes } from 'styled-components';
 import { device } from './device';
-import vt from '../images/woman.png';
-import rman from '../images/running-man.png';
-import prof from '../images/major.jpg';
+import vt from '../images/678.jpg';
+import rman from '../images/whiteBg.jpg';
+import yus from '../images/444.jpg';
 
-const imgs = [vt, rman];
+const imgs = [vt, rman, yus];
 
 export const baseDisplay = css`
   display: flex;
@@ -78,6 +78,12 @@ export const HeaderIc = Styled.div`
     text-align: center;
    
     
+`;
+
+export const HeaderBar = Styled.div`
+    padding: .5rem .6rem;
+    cursor: pointer;
+    text-align: center; 
 `;
 export const BackIc = Styled(HeaderIc)`
     border: 0;
@@ -185,7 +191,18 @@ export const DescCard = Styled.div`
 export const ButtonGroup = Styled.div`
     padding-top: 3rem;
 `;
-
+export const ClassicLink1 = Styled.a`
+    padding: 1rem 1.5rem;
+    background-color: #1280a5;
+    border: .5px solid #1280a5;
+    color: white;
+    font-family: Impact, fantacy;
+    font-size: 18px;
+    border-radius: 5px;
+    position: relative;
+    animation: ${btn1Classic} 1000ms linear;
+    cursor: pointer;
+`;
 export const ClassicBtn1 = Styled.button`
     padding: 1rem 1.5rem;
     background-color: #1280a5;

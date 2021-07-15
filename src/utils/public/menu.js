@@ -1,55 +1,69 @@
+import React, { useEffect } from 'react';
 import * as Styled from '../../components';
+import { fetchData, useAuthDispatch, useAuthState } from '../../context';
 import * as icons from '../../images';
-import prf from '../../images/major.jpg';
 export const CollapsableMenu = (props) => {
+  const dispatch = useAuthDispatch();
+  const { userData } = useAuthState();
+  useEffect(() => {
+    async function getDetails() {
+      const res = await fetchData(dispatch, '/user/client');
+      if (res) {
+        dispatch({ type: 'USER_PRESENT', user: res.data });
+      }
+    }
+    getDetails();
+  }, [dispatch]);
+  const Links = sanitizedLinks(userData.links);
   return (
     <Styled.Menu>
       <div>
         <div style={{ padding: '0rem 2rem' }}>
           <Styled.HeaderIc>
-            {/*<img src={prf} alt={'p'} width={'100%'} height={'100%'} />*/}
             <icons.User size={60} fill={'#1280a5'} />
           </Styled.HeaderIc>
         </div>
-        <div style={{ textAlign: 'center' }}> magdaline. Major</div>
+        <div style={{ textAlign: 'center' }}> {userData.fullname}</div>
       </div>
       <div>
-        <Styled.SMIconsCont>
-          <a
-            href='https://www.instagram.com/major_magdaline/'
-            target='_blank'
-            rel='noreferrer'
-          >
-            <icons.IG fill={'#1280a5'} size={20} />
-          </a>
-          <a href='https://web.facebook.com/magdaline.major'>
-            <icons.Fb fill={'#1280a5'} size={20} />
-          </a>
-          <a href='https://twitter.com/magdalinemajor'>
-            <icons.Twitter fill={'#1280a5'} size={20} />
-          </a>
-          <a href='http://web.facebook.com/magdalene.major'>
-            <icons.TikTok fill={'#1280a5'} size={20} />
-          </a>
-          <a href='http://web.facebook.com/magdalene.major'>
-            <icons.SnapChat fill={'#1280a5'} size={20} />
-          </a>
-        </Styled.SMIconsCont>
+        {Links !== undefined ? (
+          <Styled.SMIconsCont>
+            <a
+              href={`https://www.instagram.com/${Links.Instagram}`}
+              target='_blank'
+              rel='noreferrer'
+            >
+              <icons.IG fill={'#1280a5'} size={20} />
+            </a>
+            <a href={`https://web.facebook.com/${Links.Facebook}`}>
+              <icons.Fb fill={'#1280a5'} size={20} />
+            </a>
+            <a href={`https://twitter.com/${Links.Twitter}`}>
+              <icons.Twitter fill={'#1280a5'} size={20} />
+            </a>
+            <a href={`http://web.facebook.com/${Links.TikTok}`}>
+              <icons.TikTok fill={'#1280a5'} size={20} />
+            </a>
+            <a href={`http://web.facebook.com/${Links.SnapChat}`}>
+              <icons.SnapChat fill={'#1280a5'} size={20} />
+            </a>
+          </Styled.SMIconsCont>
+        ) : null}
       </div>
       <Styled.Nav>
-        <Styled.NavEl onClick={(e) => props.setView(0)}>
+        <Styled.NavEl onClick={(e) => props.history.push('/home')}>
           <Styled.Icon>
             <icons.Igloo size={20} />
           </Styled.Icon>
           Home
         </Styled.NavEl>
-        <Styled.NavEl onClick={(e) => props.setView(1)}>
+        <Styled.NavEl onClick={(e) => props.history.push('/about')}>
           <Styled.Icon>
             <icons.User size={20} fill={'white'} />
           </Styled.Icon>
           About
         </Styled.NavEl>
-        <Styled.NavEl onClick={(e) => props.setView(2)}>
+        <Styled.NavEl onClick={(e) => props.history.push('/customize')}>
           <Styled.Icon>
             <icons.Custom size={20} fill={'white'} />
           </Styled.Icon>
@@ -64,4 +78,13 @@ export const CollapsableMenu = (props) => {
       </Styled.Nav>
     </Styled.Menu>
   );
+};
+
+const sanitizedLinks = (links) => {
+  if (links === undefined) {
+    return undefined;
+  } else if (links.Instagram === null || links.Instagram === undefined) {
+    return undefined;
+  }
+  return links;
 };

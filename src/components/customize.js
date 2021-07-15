@@ -52,7 +52,7 @@ export const ContentDesc = Styled.div`
 export const Components = Styled.div`
     border-radius: 2px;
     box-shadow: 2px 2px 2px 2px gray;
-  
+    border-top: 10px solid #1280a5;
 `;
 
 export const SetUpBtns = Styled.div`
@@ -66,10 +66,41 @@ export const SetUpBtns = Styled.div`
 `;
 
 export const HeadDesc = Styled.div`
-    border-bottom: .1px solid beige;
+    border-bottom: .1px solid #1280a5;
+    font-family: impact, fantacy;
 `;
 
+export const FieldDesc = Styled.div` 
+    padding: .5rem;
+    font-family: Arial;
+    font-size: 14px;
+`;
 export const Updater = Styled.div`
     margin-left: 2rem;
     flex: 1 1 40%;
+`;
+export const Avator = Styled.div`
+    width: 200px;
+    background-color: #282c34;
+    text-align: center;
+    border-radius: 50%;
+    padding: 1rem .5rem;
+    position: relative;
+    left: 90%;
+`;
+
+export const SuccessCard = Styled.p`
+    text-align: center;
+    color: green;
+    font-style: italic;
+`;
+
+export const Editor = Styled.div`
+   position: relative;
+   font-weight: bold;
+   color: green;
+   cursor: pointer;
+   top: 5px;
+   width: 100px;
+   left: 3rem;
 `;

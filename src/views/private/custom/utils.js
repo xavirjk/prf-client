@@ -34,7 +34,9 @@ export const SM = () => {
       .forEach((item) => populate(item));
     const pathname = '/update/links';
     let res = await UploadData(dispatch, payload, pathname);
-    console.log('res', res);
+    if (res) {
+      utils.successResponse(res.message, dispatch);
+    }
   };
 
   const payload = {
@@ -52,19 +54,21 @@ export const SM = () => {
     { name: 'SnapChat', ICON: ICON(icons.SnapChat) },
   ];
   return (
-    <Styled.Form id='fr1'>
+    <Styled.CustomForm id='fr1'>
+      <Styled.FieldDesc>{__headers.smediaTxt}</Styled.FieldDesc>
       {configs.map((input) => (
         <div key={input.name}>
           <Handles name={input.name} Ic={input.ICON} />
         </div>
       ))}
       <Styled.SmediaFields>
-        <Styled.Login type='button' onClick={(e) => handleClick(e)}>
+        <Styled.CustomLogin type='button' onClick={(e) => handleClick(e)}>
           Add Handles
-        </Styled.Login>
+        </Styled.CustomLogin>
       </Styled.SmediaFields>
       <utils.ViewErrorMessage />
-    </Styled.Form>
+      <utils.ShowSuccess />
+    </Styled.CustomForm>
   );
 };
 
@@ -84,3 +88,22 @@ const Handles = (props) => {
 };
 
 const ICON = (RIcon) => <RIcon fill={'#1280a5'} size={22} />;
+
+export const __headers = {
+  avator: 'Create Your Profile',
+  smedia: 'Provide your social media Accounts',
+  bio: 'Update Your Bio',
+  about: 'Update your About',
+  bioText: 'Give a catchy but Short description ..Say out.',
+  aboutText:
+    'Tell people what you do... In a short description give your background information You' +
+    ' may also include your employment status.',
+  smediaTxt:
+    'Providing your Handles will expand your network around the social media community..' +
+    'This also adds you more Followers',
+  contacts: 'Create a communication channel',
+  passcode: 'Change Your Password',
+  passText:
+    'A strong password is a combination of Letters, Numbers, symbols and special Characters of the alphabet ' +
+    'A Minimum of 6 characters and A maximum of 24 characters is required',
+};

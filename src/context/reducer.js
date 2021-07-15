@@ -3,10 +3,12 @@ let token = localStorage.getItem('_u')
   : '';
 
 export const initialState = {
+  userData: '',
   token: '' || token,
   loading: false,
   errorMessage: null,
   successMessage: '',
+  tst: '',
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -39,6 +41,11 @@ export const AuthReducer = (initialState, action) => {
         loading: false,
         errorMessage: action.error,
       };
+    case 'TEST':
+      return {
+        ...initialState,
+        tst: action.dt,
+      };
     case '3RDPARTYAPIACCESS_ERROR':
       return {
         ...initialState,
@@ -49,6 +56,12 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         successMessage: action.message,
+        loading: false,
+      };
+    case 'USER_PRESENT':
+      return {
+        ...initialState,
+        userData: action.user,
         loading: false,
       };
     default:

@@ -20,7 +20,7 @@ export const AppRouter = ({
       path={path}
       render={(props) =>
         isPrivate && !token ? (
-          <Redirect to={{ pathname: '/' }} />
+          <Redirect to={{ pathname: '/sign-in' }} />
         ) : (
           <Component {...props} />
         )
