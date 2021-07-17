@@ -92,37 +92,74 @@ const PassReset = () => {
   );
 };
 const ContactsUpdator = () => {
+  const dispatch = useAuthDispatch();
+  const { userData } = useAuthState();
+  const { contacts } = userData;
+  let tel = contacts.tel === undefined ? '' : contacts.tel;
+  const payload = { tel: tel };
+  const [data, setData] = useState(payload);
+  async function handleRequestCode() {
+    //Reject if formatted telephone Length not equal to Required len
+
+    if (data.tel.length !== 11) {
+      dispatch({
+        type: 'APIACCESS_ERROR',
+        error: 'Invalid Phone number for country code 254',
+      });
+      return;
+    }
+    //Clear conxext Error
+    const res = await UploadData(dispatch, data, '/update/contacts');
+    if (res) {
+      utils.successResponse(res.message, dispatch);
+      utils.clearContextErrors(dispatch);
+    }
+  }
+  const TrackTelInput = (e) => {
+    const formattedPhoneNumber = utils.formatPhoneNumber(e.target.value);
+    setData({ ...data, tel: formattedPhoneNumber });
+  };
+
   return (
     <Styled.CustomForm>
       <Styled.FieldDesc></Styled.FieldDesc>
       <Styled.SmediaFields>
-        <Styled.SMIconF>
-          <icons.envelop fill={'#1280a5'} size={22} />
-        </Styled.SMIconF>
-        <Styled.SMInputs type='tel' />
+        <div>
+          <Styled.Code254>+254</Styled.Code254>
+        </div>
+        <Styled.SMInputs
+          type='tel'
+          placeholder='Phone number'
+          value={data.tel}
+          onChange={(e) => {
+            TrackTelInput(e);
+          }}
+        />
       </Styled.SmediaFields>
-      <Styled.SmediaFields>
-        <Styled.SMIconF>
-          <icons.envelop fill={'#1280a5'} size={22} />
-        </Styled.SMIconF>
-        <Styled.SMInputs type='email' />
-      </Styled.SmediaFields>
-      <Styled.CustomLogin type='button'>Submit</Styled.CustomLogin>
+
+      <Styled.CustomLogin type='button' onClick={(e) => handleRequestCode()}>
+        Submit
+      </Styled.CustomLogin>
       <utils.ViewErrorMessage />
+      <utils.ShowSuccess />
     </Styled.CustomForm>
   );
 };
 const ProfileUploader = () => {
   const dispatch = useAuthDispatch();
+  const { userData } = useAuthState();
+  let { fullname } = userData;
+  fullname = fullname ? fullname : '';
   async function handleClick() {
     let res = await UploadData(dispatch, data, '/update/profile');
     if (res) {
+      utils.clearContextErrors(dispatch);
       utils.successResponse(res.message, dispatch);
       dispatch({ type: 'TEST', dt: true });
       await UploadData(dispatch, { p_id: 0 }, '/ref/pid');
     }
   }
-  const payload = { fullname: '', profile: '', resume: '' };
+  const payload = { fullname: fullname };
   const [data, setData] = useState(payload);
   return (
     <Styled.CustomForm>
@@ -140,6 +177,7 @@ const ProfileUploader = () => {
         <Styled.SMInputs
           type='name'
           placeholder='full name'
+          value={data.fullname}
           onChange={(e) => setData({ ...data, fullname: e.target.value })}
         />
       </Styled.SmediaFields>
@@ -156,20 +194,29 @@ const ProfileUploader = () => {
   );
 };
 
-const InfoUpdator = () => <DescForm desc={__headers.bioText} path={'info'} />;
+const InfoUpdator = () => {
+  const { userData } = useAuthState();
+  let { Bio } = userData;
+  Bio = Bio ? Bio : '';
+  return <DescForm desc={__headers.bioText} path={'info'} value={Bio} />;
+};
 
-const AboutUpdator = () => (
-  <DescForm desc={__headers.aboutText} path={'about'} />
-);
+const AboutUpdator = () => {
+  const { userData } = useAuthState();
+  let { About } = userData;
+  About = About ? About : '';
+  return <DescForm desc={__headers.aboutText} path={'about'} value={About} />;
+};
 
 const DescForm = (props) => {
   const dispatch = useAuthDispatch();
-  const [data, setData] = useState('');
+  const [data, setData] = useState(props.value);
   async function handleClick(e) {
     const pathname = `/update/info`;
     const payload = props.path === 'info' ? { Bio: data } : { About: data };
     let res = await UploadData(dispatch, payload, pathname);
     if (res) {
+      utils.clearContextErrors(dispatch);
       utils.successResponse(res.message, dispatch);
     }
   }
@@ -181,6 +228,7 @@ const DescForm = (props) => {
           rows={5}
           cols={50}
           style={{ width: '60%' }}
+          value={data}
           onChange={(e) => setData(e.target.value)}
         />
       </Styled.InpField>

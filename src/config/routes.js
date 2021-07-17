@@ -26,4 +26,9 @@ export const routes = [
     component: views.LogPage,
     isPrivate: false,
   },
+  {
+    path: c_routes.notFound,
+    component: views.notFound,
+    isPrivate: false,
+  },
 ];

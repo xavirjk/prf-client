@@ -135,13 +135,14 @@ export const Igloo = (props) => {
 };
 export const Custom = (props) => {
   size = getSize(props.size);
+  fillColor = getFill(props.fill);
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 516 512'
       width={size}
       height={size}
-      fill='white'
+      fill={fillColor}
       fillOpacity='0.9'
       role='img'
     >

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import * as Styled from '../components';
+import { useAuthDispatch, useAuthState, logout } from '../context';
 import * as icons from '../images';
 import { CollapsableMenu } from '../utils/public/menu';
 export const Entry = (props) => {
   //Temp
   const [toggled, setToggle] = useState(1);
   const [inView, setView] = useState(0);
+  const { token } = useAuthState();
 
   return (
     <Styled.Main>
@@ -26,6 +28,7 @@ export const Entry = (props) => {
           )}
         </div>
         <Styled.HeaderCt />
+        {token ? <SignOut history={props.history} /> : null}
       </Styled.Header>
       <Styled.BodyCt>
         {toggled ? (
@@ -36,5 +39,20 @@ export const Entry = (props) => {
         </Styled.MainCont>
       </Styled.BodyCt>
     </Styled.Main>
+  );
+};
+
+const SignOut = (props) => {
+  function logOff() {
+    logout(dispatch);
+    props.history.push('/home');
+  }
+  const dispatch = useAuthDispatch();
+  return (
+    <Styled.LogOut onClick={(e) => logOff()}>
+      <Styled.SMIconF>
+        <icons.Custom fill={'#1280a5'} size={22} />
+      </Styled.SMIconF>
+    </Styled.LogOut>
   );
 };

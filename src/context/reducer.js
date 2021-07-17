@@ -32,7 +32,6 @@ export const AuthReducer = (initialState, action) => {
     case 'LOGOUT':
       return {
         ...initialState,
-        userDetails: '',
         token: '',
       };
     case 'APIACCESS_ERROR':

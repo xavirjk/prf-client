@@ -104,3 +104,13 @@ export const Editor = Styled.div`
    width: 100px;
    left: 3rem;
 `;
+
+export const LogOut = Styled.div`
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 2px 2px 2px 2px rgba(198, 198, 198, 0.4);
+    :hover {
+        box-shadow: 2px 2px 2px 2px rgba(198, 198, 198, 0.9);
+        cursor:pointer;
+    }
+`;

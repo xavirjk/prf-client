@@ -41,10 +41,10 @@ export const CollapsableMenu = (props) => {
             <a href={`https://twitter.com/${Links.Twitter}`}>
               <icons.Twitter fill={'#1280a5'} size={20} />
             </a>
-            <a href={`http://web.facebook.com/${Links.TikTok}`}>
+            <a href={`http://www.tiktoks.com/${Links.TikTok}`}>
               <icons.TikTok fill={'#1280a5'} size={20} />
             </a>
-            <a href={`http://web.facebook.com/${Links.SnapChat}`}>
+            <a href={`http://www.snapchat.com/${Links.SnapChat}`}>
               <icons.SnapChat fill={'#1280a5'} size={20} />
             </a>
           </Styled.SMIconsCont>
@@ -81,7 +81,7 @@ export const CollapsableMenu = (props) => {
 };
 
 const sanitizedLinks = (links) => {
-  if (links === undefined) {
+  if (links === undefined || links === null) {
     return undefined;
   } else if (links.Instagram === null || links.Instagram === undefined) {
     return undefined;

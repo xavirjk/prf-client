@@ -230,3 +230,9 @@ export const ImagePane = Styled.div`
     background-size: cover;
     height: 100%;
 `;
+
+export const NotFound = Styled.div`
+    text-align: center;
+    padding: 1.5rem
+
+`;

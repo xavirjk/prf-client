@@ -5,4 +5,5 @@ export const c_routes = {
   customize: '/customize',
   contacts: '/contacts',
   ROOT_URL: 'https://p-flio.herokuapp.com',
+  notFound: '/*',
 };

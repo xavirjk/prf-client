@@ -1,7 +1,8 @@
 import * as Styled from '../../../components';
 import * as icons from '../../../images';
 import * as utils from '../../../utils';
-import { UploadData, useAuthDispatch } from '../../../context';
+import { UploadData, useAuthDispatch, useAuthState } from '../../../context';
+import { useState } from 'react';
 
 export const SM = () => {
   const dispatch = useAuthDispatch();
@@ -46,19 +47,22 @@ export const SM = () => {
     TikTok: '',
     SnapChat: '',
   };
+  const { userData } = useAuthState();
+  let { links } = userData;
+  links = links ? links : '';
   const configs = [
-    { name: 'Instagram', ICON: ICON(icons.IG) },
-    { name: 'Facebook', ICON: ICON(icons.Fb) },
-    { name: 'Twitter', ICON: ICON(icons.Twitter) },
-    { name: 'Tiktok', ICON: ICON(icons.TikTok) },
-    { name: 'SnapChat', ICON: ICON(icons.SnapChat) },
+    { name: 'Instagram', ICON: ICON(icons.IG), value: links.Instagram },
+    { name: 'Facebook', ICON: ICON(icons.Fb), value: links.Facebook },
+    { name: 'Twitter', ICON: ICON(icons.Twitter), value: links.Twitter },
+    { name: 'Tiktok', ICON: ICON(icons.TikTok), value: links.TikTok },
+    { name: 'SnapChat', ICON: ICON(icons.SnapChat), value: links.SnapChat },
   ];
   return (
     <Styled.CustomForm id='fr1'>
       <Styled.FieldDesc>{__headers.smediaTxt}</Styled.FieldDesc>
       {configs.map((input) => (
         <div key={input.name}>
-          <Handles name={input.name} Ic={input.ICON} />
+          <Handles name={input.name} Ic={input.ICON} value={input.value} />
         </div>
       ))}
       <Styled.SmediaFields>
@@ -73,6 +77,11 @@ export const SM = () => {
 };
 
 const Handles = (props) => {
+  let link = '';
+  if (props.value !== undefined) {
+    link = props.value;
+  }
+  const [value, setVal] = useState(link);
   return (
     <div>
       <Styled.SmediaFields>
@@ -80,7 +89,9 @@ const Handles = (props) => {
         <Styled.SMInputs
           type='text'
           placeHolder={props.name}
+          value={value}
           name={props.name}
+          onChange={(e) => setVal(e.target.value)}
         />
       </Styled.SmediaFields>
     </div>
