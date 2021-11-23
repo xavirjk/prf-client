@@ -1,13 +1,5 @@
-import Styled, { createGlobalStyle } from 'styled-components';
-import SansFnt from '../fonts/OpenSansRegular.ttf';
+import Styled from 'styled-components';
 import { baseDisplay } from './home';
-
-const globalS = createGlobalStyle`
-   @font-face {
-       font-family: 'Open-Sans-reg'
-       src: url('${SansFnt}') format('truetype');
-   }
-`;
 
 export const Base = Styled.div`
      width: 100%;

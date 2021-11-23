@@ -1,4 +1,4 @@
-var size, fillColor, _stroke, stroke_width;
+var size, fillColor;
 export const Bars = (props) => {
   size = getSize(props.size);
   fillColor = getFill(props.fill);
@@ -223,10 +223,4 @@ function getSize(size) {
 }
 function getFill(fillColor) {
   return fillColor ? fillColor : 'black';
-}
-function getStroke(stroke) {
-  return stroke ? stroke : 'black';
-}
-function getStrokeWidth(stroke_width) {
-  return stroke_width ? stroke_width : '10';
 }

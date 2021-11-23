@@ -41,7 +41,7 @@ export const CollapsableMenu = (props) => {
             <a href={`https://twitter.com/${Links.Twitter}`}>
               <icons.Twitter fill={'#1280a5'} size={20} />
             </a>
-            <a href={`http://www.tiktoks.com/${Links.TikTok}`}>
+            <a href={`http://www.tiktok.com/${Links.TikTok}`}>
               <icons.TikTok fill={'#1280a5'} size={20} />
             </a>
             <a href={`http://www.snapchat.com/${Links.SnapChat}`}>

@@ -1,4 +1,3 @@
-//const ROOT_URL = 'http://localhost:3200';
 import { c_routes } from '../utils';
 
 const { ROOT_URL } = c_routes;
@@ -76,40 +75,6 @@ export async function fetchData(dispatch, path) {
         response = 0;
       }
     );
-  return response;
-}
-
-export async function makeGETrequest(request_url, dispatch, geocode) {
-  await fetch(request_url)
-    .then((r) => r.json().then((data) => (r.ok ? data : Promise.reject(data))))
-
-    .then(
-      (data) => {
-        if (data.status.code === 200) {
-          dispatch({ type: 'UPLOAD_SUCCESS' });
-          response = geocode
-            ? data.results[0].geometry
-            : data.results[0].formatted;
-        } else if (data.status.code <= 500) {
-          dispatch({
-            type: '3RDPARTYAPIACCESS_ERROR',
-            error: data.status.message,
-          });
-          response = 0;
-        } else {
-          dispatch({ type: '3RDPARTYAPIACCESS_ERROR', error: 'SERVER ERROR!' });
-          response = 0;
-        }
-      },
-      (err) => {
-        dispatch({
-          type: '3RDPARTYAPIACCESS_ERROR',
-          error: 'unable to connect to server',
-        });
-        response = 0;
-      }
-    );
-
   return response;
 }
 
